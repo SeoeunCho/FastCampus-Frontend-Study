@@ -3,7 +3,6 @@ import Square from './Square';
 import "./Board.css";
 
 const Board = () => {
-  console.log('test');
 
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
@@ -41,7 +40,8 @@ const Board = () => {
     // squares 복사본 생성
     const newSquares = squares.slice();
 
-    // if (winner)
+    // 승리자 발생 및 중복클릭 방지
+    if (calculateWinner(newSquares) || newSquares[i]) return;
 
     newSquares[i] = xIsNext ? 'X' : 'O';
     setSquares(newSquares);
