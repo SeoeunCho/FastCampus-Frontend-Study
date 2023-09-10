@@ -3,6 +3,7 @@ import Square from './Square';
 import "./Board.css";
 
 const Board = () => {
+  console.log('test');
 
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
