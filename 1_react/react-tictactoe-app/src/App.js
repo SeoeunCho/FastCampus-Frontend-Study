@@ -5,7 +5,6 @@ import Board from "./components/Board";
 const App = () => {
   const [history, setHistory] = useState([ { squares: Array(9).fill(null) } ]);
   const [xIsNext, setXIsNext] = useState(true);
-  console.log(history)
 
   const calculateWinner = (squares) => {
     const lines = [
@@ -50,16 +49,26 @@ const App = () => {
     setXIsNext(prev => !prev);
   }
 
+  const moves = history.map((step, move) => {
+    const desc = move ? 
+      'Go to Move #' + move : 
+      'Go to game start';
+
+      return (
+        <li key={ move }>
+          <button>{ desc }</button>
+        </li>
+      )
+  })
 
   return (
     <div className="game">
       <div className="game-board">
         <Board squares={current.squares} onClick={(i) => handleClick(i)} />
-        <div className='status'>{ status }</div>
       </div>
       <div className="game-info">
-        <div>get info</div>
-        <ol></ol>
+        <div className='status'>{ status }</div>
+        <ol>{ moves }</ol>
       </div>
     </div>
   );
