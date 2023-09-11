@@ -40,14 +40,14 @@ const App = () => {
 
   const handleClick = (i) => {
     const newHistory = history.slice(0, stepNumber + 1);
-    const newCurrent = newHistory[newHistory.length - 1]
+    const newCurrent = newHistory[newHistory.length - 1];
     const newSquares = newCurrent.squares.slice();
 
     // 승리자 발생 및 중복클릭 방지
     if (calculateWinner(newSquares) || newSquares[i]) return;
 
     newSquares[i] = xIsNext ? 'X' : 'O';
-    setHistory([...newHistory, { squares: newSquares}]);
+    setHistory([...newHistory, { squares: newSquares }]);
     setXIsNext(prev => !prev);
 
     setStepNumber(newHistory.length);
@@ -60,7 +60,7 @@ const App = () => {
 
       return (
         <li key={ move }>
-          <button onClick={() => jumpTo(move)}>{ desc }</button>
+          <button className="move-button" onClick={() => jumpTo(move)}>{ desc }</button>
         </li>
       )
   })
@@ -72,12 +72,15 @@ const App = () => {
 
   return (
     <div className="game">
+      <div className='game-title'>Tic Tac Toe</div>
+
       <div className="game-board">
         <Board squares={current.squares} onClick={(i) => handleClick(i)} />
       </div>
+      
       <div className="game-info">
         <div className='status'>{ status }</div>
-        <ol>{ moves }</ol>
+        <ol style={{ listStyle: 'none' }}>{ moves }</ol>
       </div>
     </div>
   );
